@@ -217,10 +217,10 @@ main() {
     # Handle single plugin execution
     if [[ -n "$PLUGIN_NAME" ]]; then
         # Check if plugin exists
-        if [[ -z "${PLUGIN_REGISTRY[$PLUGIN_NAME]:-}" ]]; then
+        if ! _plugin_exists "$PLUGIN_NAME"; then
             log_error "Plugin not found: $PLUGIN_NAME"
             log_info "Available plugins:"
-            for name in "${!PLUGIN_REGISTRY[@]}"; do
+            for name in "${PLUGIN_NAMES[@]}"; do
                 echo "  - $name"
             done
             exit 1
@@ -232,9 +232,7 @@ main() {
         else
             log_info "Running plugin with dependencies: $PLUGIN_NAME"
             # Resolve dependencies for this specific plugin
-            PLUGIN_EXECUTION_ORDER=()
-            PLUGIN_EXECUTED=()
-            PLUGIN_EXECUTING=()
+            reset_plugin_state
 
             if ! visit_plugin "$PLUGIN_NAME"; then
                 log_error "Failed to resolve dependencies for plugin: $PLUGIN_NAME"
@@ -256,8 +254,7 @@ main() {
     log_step "Execution Plan"
     echo
     for plugin_name in "${PLUGIN_EXECUTION_ORDER[@]}"; do
-        local desc="${PLUGIN_DESCRIPTIONS[$plugin_name]}"
-        echo "  $plugin_name - $desc"
+        echo "  $plugin_name - $(_plugin_desc "$plugin_name")"
     done
     echo
 
