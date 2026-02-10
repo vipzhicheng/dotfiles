@@ -45,6 +45,7 @@ source "$BOOTSTRAP_LIB_DIR/plugin_system.sh"
 DRY_RUN=false
 LIST_PLUGINS=false
 SKIP_CONFIRMATION=false
+PLUGIN_NAME=""
 
 show_help() {
     cat << EOF
@@ -58,6 +59,8 @@ Usage:
 Options:
   --dry-run              Show what would be done without doing it
   --list                 List all available plugins
+  --plugin <name>        Run only a specific plugin (and its dependencies)
+  --plugin-only <name>   Run only a specific plugin (skip dependencies)
   --debug                Enable debug output
   --continue-on-error    Continue even if a plugin fails
   --skip-confirmation    Skip all confirmation prompts (auto-yes)
@@ -72,6 +75,15 @@ Examples:
 
   # List all plugins and their dependencies
   ./bootstrap.sh --list
+
+  # Run a specific plugin (with its dependencies)
+  ./bootstrap.sh --plugin brewfile
+
+  # Run only the plugin (skip dependencies)
+  ./bootstrap.sh --plugin-only dotfiles
+
+  # Dry run for a specific plugin
+  ./bootstrap.sh --plugin homebrew --dry-run
 
   # Run with debug output
   ./bootstrap.sh --debug
@@ -94,6 +106,8 @@ Plugin System:
 EOF
 }
 
+PLUGIN_ONLY=false
+
 while [[ $# -gt 0 ]]; do
     case $1 in
         --dry-run)
@@ -103,6 +117,15 @@ while [[ $# -gt 0 ]]; do
         --list)
             LIST_PLUGINS=true
             shift
+            ;;
+        --plugin)
+            PLUGIN_NAME="$2"
+            shift 2
+            ;;
+        --plugin-only)
+            PLUGIN_NAME="$2"
+            PLUGIN_ONLY=true
+            shift 2
             ;;
         --debug)
             export BOOTSTRAP_DEBUG=true
@@ -191,10 +214,41 @@ main() {
         exit 0
     fi
 
-    # Resolve dependencies
-    if ! resolve_dependencies; then
-        log_error "Failed to resolve plugin dependencies"
-        exit 1
+    # Handle single plugin execution
+    if [[ -n "$PLUGIN_NAME" ]]; then
+        # Check if plugin exists
+        if [[ -z "${PLUGIN_REGISTRY[$PLUGIN_NAME]:-}" ]]; then
+            log_error "Plugin not found: $PLUGIN_NAME"
+            log_info "Available plugins:"
+            for name in "${!PLUGIN_REGISTRY[@]}"; do
+                echo "  - $name"
+            done
+            exit 1
+        fi
+
+        if $PLUGIN_ONLY; then
+            log_info "Running plugin only (skipping dependencies): $PLUGIN_NAME"
+            PLUGIN_EXECUTION_ORDER=("$PLUGIN_NAME")
+        else
+            log_info "Running plugin with dependencies: $PLUGIN_NAME"
+            # Resolve dependencies for this specific plugin
+            PLUGIN_EXECUTION_ORDER=()
+            PLUGIN_EXECUTED=()
+            PLUGIN_EXECUTING=()
+
+            if ! visit_plugin "$PLUGIN_NAME"; then
+                log_error "Failed to resolve dependencies for plugin: $PLUGIN_NAME"
+                exit 1
+            fi
+
+            log_success "Resolved execution order: ${PLUGIN_EXECUTION_ORDER[*]}"
+        fi
+    else
+        # Resolve all dependencies
+        if ! resolve_dependencies; then
+            log_error "Failed to resolve plugin dependencies"
+            exit 1
+        fi
     fi
     echo
 
