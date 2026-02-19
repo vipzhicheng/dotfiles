@@ -109,7 +109,7 @@ brew "tw93/tap/kakuku"
 cask "claude-code"
 cask "codex"
 cask "opencode-desktop"
-case "anomalyco/tap/opencode"
+cask "anomalyco/tap/opencode"
 
 
 # File management
