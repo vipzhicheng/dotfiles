@@ -63,7 +63,7 @@ brew "ripgrep"
 # Standard unix software packaging tool
 brew "rpm"
 # Powerful, clean, object-oriented scripting language
-brew "ruby@2.7"
+brew "ruby@3.4"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Programmatically correct mistyped console commands
