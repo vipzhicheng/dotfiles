@@ -1,4 +1,6 @@
 # ---- FZF -----
+(( $+commands[fzf] )) || return 0
+
 eval "$(fzf --zsh)"
 
 
@@ -10,19 +12,21 @@ cyan="#2CF9ED"
 
 export FZF_DEFAULT_OPTS="--color=fg:${fg},bg:${bg},hl:${purple},fg+:${fg},bg+:${bg_highlight},hl+:${purple},info:${blue},prompt:${cyan},pointer:${cyan},marker:${cyan},spinner:${cyan},header:${cyan}"
 
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+if (( $+commands[fd] )); then
+  export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
-_fzf_compgen_path() {
-  fd --hidden --exclude .git . "$1"
-}
+  _fzf_compgen_path() {
+    fd --hidden --exclude .git . "$1"
+  }
 
-_fzf_compgen_dir() {
-  fd --type=d --hidden --exclude .git . "$1"
-}
+  _fzf_compgen_dir() {
+    fd --type=d --hidden --exclude .git . "$1"
+  }
+fi
 
-source ~/fzf-git.sh/fzf-git.sh
+[[ -f ~/fzf-git.sh/fzf-git.sh ]] && source ~/fzf-git.sh/fzf-git.sh
 
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
@@ -41,17 +45,5 @@ _fzf_comprun() {
     export|unset) fzf --preview "eval 'echo ${}'"         "$@" ;;
     ssh)          fzf --preview 'dig {}'                   "$@" ;;
     *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
-  esac
-}
-
-_fzf_comprun() {
-  local command=$1
-  shift
-
-  case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
-    export|unset)  fzf --preview "eval 'echo $' {}"   "$@" ;;
-    ssh)            fzf --preview 'dig {}' "$@" ;;
-    *)            fzf --preview "--preview 'bat -n --color=always --line-range :500 {}'" "$@" ;;
   esac
 }

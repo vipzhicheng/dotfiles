@@ -103,7 +103,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Load dotfiles introspection utility functions
 local _zshrc_dir="${${(%):-%x}:A:h}"
-source "$_zshrc_dir/rc.d/dot.zsh"
+source "$_zshrc_dir/.zshrc.dot.zsh"
 
 # dot zsh/rc.d/bun.zsh
 # dot zsh/rc.d/flutter.zsh
@@ -119,5 +119,6 @@ dot zsh/rc.d/pnpm.zsh
 dot zsh/rc.d/mysql.zsh
 dot zsh/rc.d/python.zsh
 dot zsh/rc.d/ai.zsh
+dot zsh/rc.d/kaku.zsh
 dot zsh/rc.d/custom.zsh
 dot zsh/.zshrc.local.zsh 2>/dev/null || true
