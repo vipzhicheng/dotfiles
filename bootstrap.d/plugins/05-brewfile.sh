@@ -14,7 +14,7 @@ plugin_brewfile_main() {
     local dotfiles_root
     dotfiles_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
-    local brewfile="$dotfiles_root/Brewfile"
+    local brewfile="$dotfiles_root/brew/Brewfile"
 
     if [[ ! -f "$brewfile" ]]; then
         log_warning "Brewfile not found at: $brewfile"

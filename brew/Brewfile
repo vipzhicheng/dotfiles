@@ -1,0 +1,95 @@
+########################################
+#          Shell & Terminal            #
+########################################
+instance_eval File.read(File.expand_path("brew.d/shell-terminal.Brewfile", __dir__))
+
+########################################
+#          File Management             #
+########################################
+instance_eval File.read(File.expand_path("brew.d/file-management.Brewfile", __dir__))
+
+########################################
+#           Text & Search              #
+########################################
+instance_eval File.read(File.expand_path("brew.d/text-search.Brewfile", __dir__))
+
+########################################
+#             Editor                   #
+########################################
+instance_eval File.read(File.expand_path("brew.d/editor.Brewfile", __dir__))
+
+########################################
+#           Git & Version Control      #
+########################################
+instance_eval File.read(File.expand_path("brew.d/git.Brewfile", __dir__))
+
+########################################
+#         Programming Languages        #
+########################################
+instance_eval File.read(File.expand_path("brew.d/programming-languages.Brewfile", __dir__))
+
+########################################
+#            Database                  #
+########################################
+instance_eval File.read(File.expand_path("brew.d/database.Brewfile", __dir__))
+
+########################################
+#         DevOps & Infrastructure      #
+########################################
+instance_eval File.read(File.expand_path("brew.d/devops.Brewfile", __dir__))
+
+########################################
+#           JSON & Data Processing     #
+########################################
+instance_eval File.read(File.expand_path("brew.d/json-data.Brewfile", __dir__))
+
+########################################
+#         Media & Download             #
+########################################
+instance_eval File.read(File.expand_path("brew.d/media.Brewfile", __dir__))
+
+########################################
+#           PDF & Documents            #
+########################################
+instance_eval File.read(File.expand_path("brew.d/pdf-documents.Brewfile", __dir__))
+
+########################################
+#         System Monitoring            #
+########################################
+instance_eval File.read(File.expand_path("brew.d/system-monitoring.Brewfile", __dir__))
+
+########################################
+#          Disk & Cleanup              #
+########################################
+instance_eval File.read(File.expand_path("brew.d/disk-cleanup.Brewfile", __dir__))
+
+########################################
+#          Network & Download          #
+########################################
+instance_eval File.read(File.expand_path("brew.d/network.Brewfile", __dir__))
+
+########################################
+#           Utilities                  #
+########################################
+instance_eval File.read(File.expand_path("brew.d/utilities.Brewfile", __dir__))
+
+########################################
+#          Window Management           #
+########################################
+instance_eval File.read(File.expand_path("brew.d/window-management.Brewfile", __dir__))
+
+########################################
+#          AI Tools & IDEs             #
+########################################
+instance_eval File.read(File.expand_path("brew.d/ai-tools.Brewfile", __dir__))
+
+########################################
+#          macOS Enhancements          #
+########################################
+instance_eval File.read(File.expand_path("brew.d/macos-enhancements.Brewfile", __dir__))
+
+########################################
+#          Local (Machine-specific)    #
+########################################
+local_brewfile = File.expand_path("Brewfile.local", __dir__)
+instance_eval File.read(local_brewfile) if File.exist?(local_brewfile)

@@ -30,7 +30,7 @@ function dotfiles::get_root() {
 
     # Basic validation: check for signature files/directories in the supposed root
     # (Adjust the conditions according to your actual repository structure)
-    if [[ -d "$possible_root" && ( -f "$possible_root/Brewfile" || -d "$possible_root/config" || -f "$possible_root/zsh/.zshrc.local.example" ) ]]; then
+    if [[ -d "$possible_root" && ( -f "$possible_root/brew/Brewfile" || -d "$possible_root/config" || -d "$possible_root/zsh.d" ) ]]; then
         DOTFILES_ROOT="$possible_root"
         dotfiles::debug "Validation passed, using: $DOTFILES_ROOT"
     else

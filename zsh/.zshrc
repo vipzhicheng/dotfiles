@@ -105,20 +105,20 @@ source $ZSH/oh-my-zsh.sh
 local _zshrc_dir="${${(%):-%x}:A:h}"
 source "$_zshrc_dir/.zshrc.dot.zsh"
 
-# dot zsh/rc.d/bun.zsh
-# dot zsh/rc.d/flutter.zsh
-# dot zsh/rc.d/ruby.zsh
-# dot zsh/rc.d/php.zsh
-dot zsh/rc.d/homebrew.sh
-dot zsh/rc.d/nvm.zsh
-dot zsh/rc.d/fzf.zsh
-dot zsh/rc.d/thefuck.zsh
-dot zsh/rc.d/zoxide.zsh
-dot zsh/rc.d/bat.zsh
-dot zsh/rc.d/pnpm.zsh
-dot zsh/rc.d/mysql.zsh
-dot zsh/rc.d/python.zsh
-dot zsh/rc.d/ai.zsh
-dot zsh/rc.d/kaku.zsh
-dot zsh/rc.d/custom.zsh
+# dot zsh.d/bun.zsh
+# dot zsh.d/flutter.zsh
+# dot zsh.d/ruby.zsh
+# dot zsh.d/php.zsh
+dot zsh.d/homebrew.sh
+dot zsh.d/nvm.zsh
+dot zsh.d/fzf.zsh
+dot zsh.d/thefuck.zsh
+dot zsh.d/zoxide.zsh
+dot zsh.d/bat.zsh
+dot zsh.d/pnpm.zsh
+dot zsh.d/mysql.zsh
+dot zsh.d/python.zsh
+dot zsh.d/ai.zsh
+dot zsh.d/kaku.zsh
+dot zsh.d/custom.zsh
 dot zsh/.zshrc.local.zsh 2>/dev/null || true
