@@ -4,6 +4,7 @@ tap "ynqa/tap"
 tap "zegervdv/zathura"
 tap "anhoder/go-musicfox"
 tap "tw93/tap"
+tap "nikitabobko/tap"
 
 # Automate deployment, configuration, and upgrading
 brew "ansible"
@@ -87,21 +88,21 @@ brew "you-get"
 brew "zoxide"
 
 # Kubernetes CLI To Manage Your Clusters In Style!
-brew "derailed/k9s/k9s"
+brew "k9s"
 # Terraform
-brew "hashicorp/tap/terraform"
+brew "terraform"
 # JSON navigator and interactive filter leveraging jq
-brew "ynqa/tap/jnv"
+brew "jnv"
 # PDF viewer
-brew "zegervdv/zathura/zathura"
+brew "zathura"
 # Poppler backend plugin for zathura
-brew "zegervdv/zathura/zathura-pdf-poppler"
+brew "zathura-pdf-poppler"
 
 # Music Player
-brew "anhoder/go-musicfox/go-musicfox"
+brew "go-musicfox"
 
 # AeroSpace is an i3-like tiling window manager for macOS
-cask "nikitabobko/tap/aerospace"
+cask "aerospace"
 # Orchestrates virtual Ubuntu instances
 cask "multipass"
 # AI coding agent desktop client
@@ -113,3 +114,6 @@ cask "syntax-highlight"
 # Disk analyzer and clean
 brew "mole"
 brew "kakuku"
+
+# AI Cli & IDEs
+cask "claude-code"
