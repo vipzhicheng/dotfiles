@@ -3,6 +3,7 @@ tap "hashicorp/tap"
 tap "ynqa/tap"
 tap "zegervdv/zathura"
 tap "anhoder/go-musicfox"
+tap "tw93/tap"
 
 # Automate deployment, configuration, and upgrading
 brew "ansible"
@@ -107,3 +108,8 @@ cask "multipass"
 cask "opencode-desktop"
 # Quicklook extension for source files
 cask "syntax-highlight"
+
+
+# Disk analyzer and clean
+brew "mole"
+brew "kakuku"
