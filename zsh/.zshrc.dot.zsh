@@ -24,8 +24,8 @@ function dotfiles::get_root() {
     local this_file="${(%):-%x:A}"
     dotfiles::debug "Current file: $this_file"
 
-    # Assuming structure dotfiles/zsh/rc.d/dot.zsh → go up three levels to reach root
-    local possible_root="${this_file:A:h:h:h}"
+    # Assuming structure dotfiles/zsh/.zshrc.dot.zsh → go up two levels to reach root
+    local possible_root="${this_file:A:h:h}"
     dotfiles::debug "Possible root: $possible_root"
 
     # Basic validation: check for signature files/directories in the supposed root
@@ -37,7 +37,7 @@ function dotfiles::get_root() {
         # Fallback if detection fails (you can adjust this fallback logic if needed)
         dotfiles::debug "Validation failed, using fallback"
         print -u2 -- "Warning: Could not reliably determine dotfiles root directory, using assumed path"
-        DOTFILES_ROOT="${this_file:A:h:h:h}"
+        DOTFILES_ROOT="${this_file:A:h:h}"
         print -u2 -- "Using fallback path: $DOTFILES_ROOT"
     fi
 
