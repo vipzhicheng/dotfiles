@@ -1,7 +1,5 @@
 tap "derailed/k9s"
 tap "hashicorp/tap"
-tap "homebrew/cask-fonts"
-tap "homebrew/services"
 tap "ynqa/tap"
 tap "zegervdv/zathura"
 tap "anhoder/go-musicfox"
