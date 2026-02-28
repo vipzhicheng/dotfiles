@@ -41,8 +41,22 @@ plugin_dotfiles_main() {
         log_success "Created: $zshrc_temp"
     fi
 
-    # Symlink other dotfiles as needed
-    # Add more symlink operations here for other config files
+    # Backup and symlink .gitconfig
+    if [[ -f "$dotfiles_root/git/.gitconfig" ]]; then
+        log_info "Creating symlink for .gitconfig"
+        safe_symlink "$dotfiles_root/git/.gitconfig" "${HOME}/.gitconfig"
+        log_success "Symlinked: ~/.gitconfig -> $dotfiles_root/git/.gitconfig"
+    else
+        log_warning ".gitconfig not found in dotfiles"
+    fi
+
+    # Create .gitconfig.local if it doesn't exist
+    local gitconfig_local="${HOME}/.gitconfig.local"
+    if [[ ! -f "$gitconfig_local" ]]; then
+        log_info "Creating .gitconfig.local from example template"
+        cp "$dotfiles_root/git/.gitconfig.local.example" "$gitconfig_local"
+        log_success "Created: $gitconfig_local (please edit with your info)"
+    fi
 
     log_success "Dotfiles symlinks created"
 
