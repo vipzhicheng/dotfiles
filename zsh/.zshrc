@@ -106,7 +106,7 @@ local _zshrc_dir="${${(%):-%x}:A:h}"
 source "$_zshrc_dir/.zshrc.dot.zsh"
 
 # dot zsh.d/bun.zsh
-# dot zsh.d/flutter.zsh
+dot zsh.d/flutter.zsh
 # dot zsh.d/ruby.zsh
 # dot zsh.d/php.zsh
 dot zsh.d/homebrew.sh
