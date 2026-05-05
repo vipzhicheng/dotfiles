@@ -122,3 +122,8 @@ dot zsh.d/ai.zsh
 dot zsh.d/kaku.zsh
 dot zsh.d/custom.zsh
 dot zsh/.zshrc.local.zsh 2>/dev/null || true
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/zhicheng/.lmstudio/bin"
+# End of LM Studio CLI section
+

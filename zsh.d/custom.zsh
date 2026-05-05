@@ -1,7 +1,4 @@
 
-# Semo Related
-## alias mm="semo mm"
-(( $+commands[semo] )) && eval "$(semo completion)"
 
 export PATH="$HOME/.local/bin:$PATH"
 
